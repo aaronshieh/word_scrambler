@@ -7,17 +7,23 @@ function main() {
     var guesses = [];
     let letters = $('#letters');
     let btn = $('#btnScramble');
+    let btnClear = $('#btnClear');
     let btnReset = $('#btnReset');
+    var resultDiv = $('#resultDiv');
 
-    letters.on("keyup", function() {
-       letters.val(letters.val().toUpperCase());
+    letters.on("keyup", function () {
+        letters.val(letters.val().toUpperCase());
     });
 
-    btnReset.on("click", function() {
-       reset();
+    btnClear.on("click", function () {
+        clearResultDiv();
     });
 
-    btn.on("click", function() {
+    btnReset.on("click", function () {
+        reset();
+    });
+
+    btn.on("click", function () {
         if (word !== letters.val()) {
             word = letters.val();
             reset();
@@ -27,10 +33,15 @@ function main() {
         let charArray = letters.val().split('');
         let totalPossibilities = factorial(charArray.length);
         while (guesses.length < totalPossibilities) {
-            let result = scramble(charArray);
-            if (guesses.indexOf(result) === -1) {
-                guesses.push(result);
-                $('#resultDiv').append(`<p>${result}</p>`);
+            let resultArray = shuffleArray(charArray);
+            let resultWord = resultArray.join('');
+            if (guesses.indexOf(resultWord) === -1) {
+                guesses.push(resultWord);
+                resultDiv.append('<p>');
+                resultArray.forEach((value, index) => {
+                    resultDiv.append(`<span>${value}</span>`);
+                })
+                resultDiv.append('</p>');
                 return;
             }
         }
@@ -38,10 +49,14 @@ function main() {
         alert('no more possiblities');
     });
 
+    function clearResultDiv() {
+        resultDiv.empty();
+    }
+
     function reset() {
         letters.val(undefined);
         guesses = [];
-        $('#resultDiv').empty();
+        clearResultDiv();
     }
 }
 
@@ -50,11 +65,6 @@ function factorial(num) {
         return 1;
     }
     return num * factorial(num - 1);
-}
-
-function scramble(letters) {
-    let shuffledArray = shuffleArray(letters);
-    return shuffledArray.join('');
 }
 
 function shuffleArray(array) {
