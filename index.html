@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word Scrambler</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="main.js"></script>
+    <style>
+        input {
+            border: none;
+            border-bottom: solid 1px;
+            outline: none;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        textarea {
+            border: none;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        #resultDiv {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <h1>ENTER YOUR LETTERS</h1>
+    <div class="row">
+        <div class="form-group">
+            <input id="letters" type="text" maxlength="5">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <button id="btnScramble" class="btn btn-primary">SCRAMBLE!</button>
+            <button id="btnReset" class="btn btn-warning">RESET</button>
+        </div>
+    </div>
+    <div id="resultDiv" class="row">
+    </div>
+</div>
+</body>
+</html>
